@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import ToDoItem from "./ToDoItem";
 
 function App() {
@@ -17,6 +17,14 @@ function App() {
     setInputText("");
   }
 
+  function deleteItem(id) {
+    setItems(prevItems => {
+      return prevItems.filter((item, index) => {
+        return index !== id;
+      });
+    });
+  }
+
   return (
     <div className="container">
       <div className="heading">
@@ -30,8 +38,13 @@ function App() {
       </div>
       <div>
         <ul>
-          {items.map(todoItem => (
-            <ToDoItem item={todoItem} />
+          {items.map((todoItem, index) => (
+            <ToDoItem
+              key={index}
+              id={index}
+              item={todoItem}
+              onChecked={deleteItem}
+            />
           ))}
         </ul>
       </div>

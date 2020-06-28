@@ -1,29 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 
 function ToDoItem(props) {
-  const [decoration, changeDecoration] = useState("");
-
-  function selectItem() {
-    if (decoration === "line-through") {
-      return changeDecoration("");
-    } else {
-      return changeDecoration("line-through");
-    }
-  }
-
   return (
-    <li onClick={selectItem} style={{ textDecorationLine: decoration }}>
+    <li
+      onClick={() => {
+        props.onChecked(props.id);
+      }}
+    >
       {props.item}
     </li>
   );
 }
 
-// possible also to manage with useState true/false only and then apply directly in the inline css as:
-// textDecorationLine: state ? "line-through" : none;
-// also to set opposite state simply:
-
-// const [state, changeState] = React.useState(false);
-// changeState(!state);
-// ;)
-
 export default ToDoItem;
+
+// tu onClick musí volať funkciu a až z nej props.onChecked(props.id), pretožýe ak sú zátvorky za fumkciou, znamená to, že ju bude volať a volá ju pri každom renderi resp. pri prechode kódom aj bez skutočného kliknutia; takto ju bude volať až po skutočnom stlačení onClick; predtým bol "executed on render"
