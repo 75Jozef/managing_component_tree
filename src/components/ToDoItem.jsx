@@ -18,4 +18,12 @@ function ToDoItem(props) {
   );
 }
 
+// possible also to manage with useState true/false only and then apply directly in the inline css as:
+// textDecorationLine: state ? "line-through" : none;
+// also to set opposite state simply:
+
+// const [state, changeState] = React.useState(false);
+// changeState(!state);
+// ;)
+
 export default ToDoItem;
